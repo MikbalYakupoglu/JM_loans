@@ -11,6 +11,7 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Table(name = "loans")
 public class Loan extends BaseEntity{
     @Id
     @Column(name = "loan_id")

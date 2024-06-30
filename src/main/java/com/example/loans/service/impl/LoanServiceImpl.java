@@ -43,39 +43,39 @@ public class LoanServiceImpl implements LoanService {
 
     @Override
     public LoanDto fetchLoan(String mobileNumber) {
-        Loan loan = loanRepository.findByMobileNumber(mobileNumber)
+        Loan loans = loanRepository.findByMobileNumber(mobileNumber)
                 .orElseThrow(() -> new ResourceNotFoundException("Loan", "mobileNumber", mobileNumber));
 
-        return LoansMapper.mapToLoanDto(loan);
+        return LoansMapper.mapToLoanDto(loans);
     }
 
     @Override
     public boolean updateLoan(LoanDto loanDto) {
-        Loan loan = loanRepository.findByLoanNumber(loanDto.getLoanNumber())
+        Loan loans = loanRepository.findByLoanNumber(loanDto.getLoanNumber())
                 .orElseThrow(() -> new ResourceNotFoundException("Loan", "loanNumber", loanDto.getLoanNumber()));
 
-        loanRepository.save(LoansMapper.mapToLoan(loanDto, loan));
+        loanRepository.save(LoansMapper.mapToLoan(loanDto, loans));
         return true;
     }
 
     @Override
     public boolean deleteLoan(String mobileNumber) {
-        Loan loan = loanRepository.findByMobileNumber(mobileNumber)
+        Loan loans = loanRepository.findByMobileNumber(mobileNumber)
                 .orElseThrow(() -> new ResourceNotFoundException("Loan", "mobileNumber", mobileNumber));
 
-        loanRepository.delete(loan);
+        loanRepository.delete(loans);
         return true;
     }
 
     private Loan createNewLoan(String mobileNumber) {
-        Loan newLoan = new Loan();
+        Loan newLoans = new Loan();
         long randomLoanNumber = 100000000000L + random.nextInt(900000000);
-        newLoan.setLoanNumber(Long.toString(randomLoanNumber));
-        newLoan.setMobileNumber(mobileNumber);
-        newLoan.setLoanType(LoansConstants.HOME_LOAN);
-        newLoan.setTotalLoan(LoansConstants.NEW_LOAN_LIMIT);
-        newLoan.setAmountPaid(0);
-        newLoan.setOutstandingAmount(LoansConstants.NEW_LOAN_LIMIT);
-        return newLoan;
+        newLoans.setLoanNumber(Long.toString(randomLoanNumber));
+        newLoans.setMobileNumber(mobileNumber);
+        newLoans.setLoanType(LoansConstants.HOME_LOAN);
+        newLoans.setTotalLoan(LoansConstants.NEW_LOAN_LIMIT);
+        newLoans.setAmountPaid(0);
+        newLoans.setOutstandingAmount(LoansConstants.NEW_LOAN_LIMIT);
+        return newLoans;
     }
 }

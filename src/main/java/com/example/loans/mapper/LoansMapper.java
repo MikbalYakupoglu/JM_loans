@@ -4,50 +4,51 @@ import com.example.loans.dto.LoanDto;
 import com.example.loans.entity.Loan;
 
 public class LoansMapper {
+    private LoansMapper(){}
 
-    public static LoanDto mapToLoanDto(Loan loan) {
+    public static LoanDto mapToLoanDto(Loan loans) {
         LoanDto loanDto = new LoanDto();
 
-        loanDto.setLoanNumber(loan.getLoanNumber());
-        loanDto.setLoanType(loan.getLoanType());
-        loanDto.setMobileNumber(loan.getMobileNumber());
-        loanDto.setTotalLoan(loan.getTotalLoan());
-        loanDto.setAmountPaid(loan.getAmountPaid());
-        loanDto.setOutstandingAmount(loan.getOutstandingAmount());
+        loanDto.setLoanNumber(loans.getLoanNumber());
+        loanDto.setLoanType(loans.getLoanType());
+        loanDto.setMobileNumber(loans.getMobileNumber());
+        loanDto.setTotalLoan(loans.getTotalLoan());
+        loanDto.setAmountPaid(loans.getAmountPaid());
+        loanDto.setOutstandingAmount(loans.getOutstandingAmount());
 
         return loanDto;
     }
 
-    public static LoanDto mapToLoanDto(Loan loan, LoanDto loanDto) {
-        loanDto.setLoanNumber(loan.getLoanNumber());
-        loanDto.setLoanType(loan.getLoanType());
-        loanDto.setMobileNumber(loan.getMobileNumber());
-        loanDto.setTotalLoan(loan.getTotalLoan());
-        loanDto.setAmountPaid(loan.getAmountPaid());
-        loanDto.setOutstandingAmount(loan.getOutstandingAmount());
+    public static LoanDto mapToLoanDto(Loan loans, LoanDto loanDto) {
+        loanDto.setLoanNumber(loans.getLoanNumber());
+        loanDto.setLoanType(loans.getLoanType());
+        loanDto.setMobileNumber(loans.getMobileNumber());
+        loanDto.setTotalLoan(loans.getTotalLoan());
+        loanDto.setAmountPaid(loans.getAmountPaid());
+        loanDto.setOutstandingAmount(loans.getOutstandingAmount());
         return loanDto;
     }
 
     public static Loan mapToLoan(LoanDto loanDto) {
-        Loan loan = new Loan();
+        Loan loans = new Loan();
 
-        loan.setLoanNumber(loanDto.getLoanNumber());
-        loan.setLoanType(loanDto.getLoanType());
-        loan.setMobileNumber(loanDto.getMobileNumber());
-        loan.setTotalLoan(loanDto.getTotalLoan());
-        loan.setAmountPaid(loanDto.getAmountPaid());
-        loan.setOutstandingAmount(loanDto.getOutstandingAmount());
+        loans.setLoanNumber(loanDto.getLoanNumber());
+        loans.setLoanType(loanDto.getLoanType());
+        loans.setMobileNumber(loanDto.getMobileNumber());
+        loans.setTotalLoan(loanDto.getTotalLoan());
+        loans.setAmountPaid(loanDto.getAmountPaid());
+        loans.setOutstandingAmount(loanDto.getOutstandingAmount());
 
-        return loan;
+        return loans;
     }
 
-    public static Loan mapToLoan(LoanDto loanDto, Loan loan) {
-        loan.setLoanNumber(loanDto.getLoanNumber());
-        loan.setLoanType(loanDto.getLoanType());
-        loan.setMobileNumber(loanDto.getMobileNumber());
-        loan.setTotalLoan(loanDto.getTotalLoan());
-        loan.setAmountPaid(loanDto.getAmountPaid());
-        loan.setOutstandingAmount(loanDto.getOutstandingAmount());
-        return loan;
+    public static Loan mapToLoan(LoanDto loanDto, Loan loans) {
+        loans.setLoanNumber(loanDto.getLoanNumber());
+        loans.setLoanType(loanDto.getLoanType());
+        loans.setMobileNumber(loanDto.getMobileNumber());
+        loans.setTotalLoan(loanDto.getTotalLoan());
+        loans.setAmountPaid(loanDto.getAmountPaid());
+        loans.setOutstandingAmount(loanDto.getOutstandingAmount());
+        return loans;
     }
 }
