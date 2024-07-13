@@ -7,6 +7,8 @@ import com.example.loans.dto.ResponseDto;
 import com.example.loans.service.LoanService;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Pattern;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -15,7 +17,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping(path = "/api/v1/loans", produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(path = "/loans", produces = MediaType.APPLICATION_JSON_VALUE)
 @Validated
 public class LoansController {
 
@@ -25,6 +27,8 @@ public class LoansController {
     public LoansController(LoanService loanService) {
         this.loanService = loanService;
     }
+
+    private static final Logger logger = LogManager.getLogger(LoansController.class);
 
     @PostMapping("/create")
     public ResponseEntity<ResponseDto> createLoan(@RequestParam
@@ -38,12 +42,12 @@ public class LoansController {
     }
 
     @GetMapping("/fetch")
-    public ResponseEntity<LoanDto> fetchLoan(@RequestParam
-                                             @Pattern(regexp = "(^$|\\d{10})", message = "Mobile number must be 10 digits")
+    public ResponseEntity<LoanDto> fetchLoan(@RequestHeader("nakoual-correlation-id") String correlationId,
+            @RequestParam @Pattern(regexp = "(^$|\\d{10})", message = "Mobile number must be 10 digits")
                                              String mobileNumber) {
 
+        logger.info("nakoual-correlation-id found : {}", correlationId);
         LoanDto loanDto = loanService.fetchLoan(mobileNumber);
-
         return new ResponseEntity<>(loanDto, HttpStatus.OK);
     }
 
